@@ -14,8 +14,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
 	rel="stylesheet" />
-<link rel="shortcut icon" href="img/favicon.ico"
-	type="image/x-icon" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 </head>
 <body>
 	<div class="login-container">
@@ -33,9 +32,10 @@
 
 		<div class="right-panel">
 			<div class="form-wrapper">
+				<p style="color: red">${logout}</p>
+				<br>
 				<h2>Sign Up</h2>
 				<p style="color: red">${signupfail}</p>
-				<br>
 				<form class="login-form" action="signup" method="post">
 					<label for="username">Username</label> <input type="text"
 						name="username" placeholder="Create an username" required /> <label

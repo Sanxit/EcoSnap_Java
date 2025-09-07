@@ -52,7 +52,6 @@
 					</div>
 				</div>
 			</nav>
-			<p style="color: red">${logout}</p>
 		</div>
 	</header>
 
