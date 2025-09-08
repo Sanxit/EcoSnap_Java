@@ -1,56 +1,43 @@
 package ecosnap.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import ecosnap.controller.UserControllerImplements;
-
-//URL PATTERN
-
-//Servlet handles get request and post request
-//Servlet also helps open another html/jsp page after 
-//its work on request is completed
 
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		req.getRequestDispatcher("/signup.jsp").forward(req, resp);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("activeUser") != null) {
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Post Request Incoming");
-
-		System.out.println(req.getParameter("username"));
-		System.out.println(req.getParameter("password"));
-
-		// Request Dispatcher to Response
-		// Opens another page
-
-		String username = req.getParameter("username");
-		// req- object of HTTPServletRequest
-		String password = req.getParameter("password");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 
 		UserControllerImplements uc = new UserControllerImplements();
+		HttpSession session = request.getSession();
 
-		if (uc.userSignup(username, password) == true) {
-			req.setAttribute("signupsuccessful", "SignedUp Successfully! Please Log In");
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
+		if (uc.userSignup(email, password)) {
+			session.setAttribute("signupsuccessful", "Signed Up Successfully! Please Log In");
+			response.sendRedirect("login.jsp");
 		} else {
-			req.setAttribute("signupfail", "Sign Up Fail!!! Try Again!");
-			req.getRequestDispatcher("signup.jsp").forward(req, resp);
+			session.setAttribute("signupfail", "Sign Up Failed! Try Again!");
+			response.sendRedirect("signup.jsp");
 		}
-
 	}
-
 }

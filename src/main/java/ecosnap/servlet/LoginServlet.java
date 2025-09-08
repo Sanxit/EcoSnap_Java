@@ -8,57 +8,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import ecosnap.controller.UserControllerImplements;
 import ecosnap.model.UserTable;
 import ecosnap.model.BookTable;
-import ecosnap.controller.UserControllerImplements;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	// Display login page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
-	// Handle login form submission
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
 		UserControllerImplements uc = new UserControllerImplements();
+		HttpSession session = request.getSession();
 
-		if (uc.userExists(username, password)) {
+		if (uc.userExists(email, password)) {
+			session.setAttribute("activeUser", email);
 
-			request.setAttribute("username", username);
+			if ("admin@ecosnap.com".equals(email)) {
+				List<UserTable> userList = uc.allData();
+				List<BookTable> bookingList = uc.userBooks();
 
-			List<UserTable> userList = uc.allData(); // fetch all users
-			request.setAttribute("userData", userList);
+				session.setAttribute("usertable", userList);
+				session.setAttribute("bookingtable", bookingList);
 
-			HttpSession session = request.getSession();
-			session.setAttribute("activeUser", username);
-
-			if ("admin".equals(username) && "admin".equals(password)) {
-
-				// Fetch all bookings for admin
-				List<BookTable> bookingList = uc.userBooks(); // make sure userBooks() returns List<BookTable>
-				request.setAttribute("bookingData", bookingList);
-
-				request.getRequestDispatcher("home.jsp").forward(request, response);
+				response.sendRedirect("dashboard.jsp");
 			} else {
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				response.sendRedirect("index.jsp");
 			}
 
 		} else {
-			request.setAttribute("error", "Username or Password Incorrect!");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			session.setAttribute("error", "Email or Password Incorrect!");
+			response.sendRedirect("login.jsp");
 		}
 	}
-
 }

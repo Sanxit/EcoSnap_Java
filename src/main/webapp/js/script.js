@@ -134,4 +134,3 @@ backBtn.addEventListener('click', () => {
 	personalForm.classList.remove('active');
 	photoshootForm.classList.add('active');
 });
-

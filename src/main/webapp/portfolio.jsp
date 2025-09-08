@@ -10,7 +10,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
 	rel="stylesheet" />
-<link rel="shortcut icon" href="./assets/img/favicon.ico"
+<link rel="shortcut icon" href="img/favicon.ico"
 	type="image/x-icon" />
 </head>
 <body>
@@ -37,7 +37,7 @@
 						</a></li>
 
 					</ul>
-					<a class="hire-btn" href="signup">Booking</a>
+					<a class="hire-btn" href="book">Booking</a>
 					<div id="mySidenav" class="sidenav">
 						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 						<a href="" onclick="closeNav()">Home</a> <a href="about"

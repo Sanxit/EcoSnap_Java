@@ -37,7 +37,7 @@
 						</a></li>
 
 					</ul>
-					<a class="hire-btn" href="signup">Booking</a>
+					<a class="hire-btn" href="book">Booking</a>
 					<div id="mySidenav" class="sidenav">
 						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 						<a href="" onclick="closeNav()">Home</a> <a href="about"
@@ -57,6 +57,23 @@
 	</header>
 	<section class="booking">
 		<div class="eco-container">
+			<%
+			if (request.getAttribute("booksuccess") != null) {
+			%>
+			<p style="color: green; font-weight: bold; font-size: 24px; text-align: center;  margin-bottom: 20px;">Booking successful!</p>
+			<%
+			}
+			%>
+
+			<%
+			if (request.getAttribute("bookfail") != null) {
+			%>
+			<p style="color: red; font-weight: bold; font-size: 24px; text-align: center; magrin-bottom: 20px;">Booking failed. Please
+				try again.</p>
+			<%
+			}
+			%>
+
 			<h2 class="section-title">MAKE A BOOKING</h2>
 			<div class="booking-steps">
 				<div class="booking-step">
@@ -86,23 +103,6 @@
 			</div>
 		</div>
 	</section>
-	<%
-	if (request.getAttribute("booksuccess") != null) {
-	%>
-	<p style="color: green; font-weight: bold;">Booking successful!</p>
-	<%
-	}
-	%>
-
-	<%
-	if (request.getAttribute("bookfail") != null) {
-	%>
-	<p style="color: red; font-weight: bold;">Booking failed. Please
-		try again.</p>
-	<%
-	}
-	%>
-
 	<div class="eco-container">
 		<div class="service-pad">
 			<article class="service-card">

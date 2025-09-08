@@ -32,14 +32,11 @@
 
 		<div class="right-panel">
 			<div class="form-wrapper">
-				<p style="color: red">${logout}</p>
-				<br>
 				<h2>Sign Up</h2>
 				<p style="color: red">${signupfail}</p>
 				<form class="login-form" action="signup" method="post">
-					<label for="username">Username</label> <input type="text"
-						name="username" placeholder="Create an username" required /> <label
-						for="password">Password</label>
+					<label for="email">Email</label> <input type="email" name="email"
+						placeholder="Enter an email" required /> <label for="password">Password</label>
 					<div class="password-wrapper">
 						<input type="password" name="password"
 							placeholder="Create a password" required />

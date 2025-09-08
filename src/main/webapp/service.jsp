@@ -37,7 +37,7 @@
 						</a></li>
 
 					</ul>
-					<a class="hire-btn" href="signup">Booking</a>
+					<a class="hire-btn" href="book">Booking</a>
 					<div id="mySidenav" class="sidenav">
 						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 						<a href="index.jsp" onclick="closeNav()">Home</a> <a href="about"

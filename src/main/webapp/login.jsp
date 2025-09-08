@@ -18,18 +18,48 @@
 </head>
 <body>
 	<div class="auth-modal">
-		<!-- <button class="close-btn" aria-label="Close">&times;</button> -->
 		<a href="index.jsp" style="text-decoration: none; color: black;"><i
 			class="fa-solid fa-xmark"></i></a>
+		<%
+		String signupMsg = (String) session.getAttribute("signupsuccessful");
+		if (signupMsg != null) {
+		%>
+		<p style="color: green; text-align: center; margin: 20px 0;"><%=signupMsg%></p>
+		<%
+		session.removeAttribute("signupsuccessful");
+		}
+
+		String signupFail = (String) session.getAttribute("signupfail");
+		if (signupFail != null) {
+		%>
+		<p style="color: red; text-align: center; margin: 20px 0;"><%=signupFail%></p>
+		<%
+		session.removeAttribute("signupfail");
+		}
+
+		String logoutMsg = (String) session.getAttribute("logout");
+		if (logoutMsg != null) {
+		%>
+		<p style="color: red; text-align: center; margin: 20px 0;"><%=logoutMsg%></p>
+		<%
+		session.removeAttribute("logout");
+		}
+
+		String errorMsg = (String) session.getAttribute("error");
+		if (errorMsg != null) {
+		%>
+		<p style="color: red; text-align: center; margin: 20px 0;"><%=errorMsg%></p>
+		<%
+		session.removeAttribute("error");
+		}
+		%>
 		<h2>Welcome Back</h2>
-		<p style="color: green">${signupsuccessful}</p>
-		<p style="color: red">${error}</p>
-		<br>
+
 		<form class="auth-form" method="post" action="login">
-			<label for="username">Username</label> <input type="username"
-				name="username" placeholder="Enter your username" required /> <label
-				for="password">Password</label> <input type="password"
-				name="password" placeholder="Enter your password" required />
+			<label for="email">Email</label> <input type="email" name="email"
+				placeholder="Enter your email" required /> <label for="password">Password</label>
+			<input type="password" name="password"
+				placeholder="Enter your password" required />
 			<button type="submit">Continue</button>
 		</form>
 

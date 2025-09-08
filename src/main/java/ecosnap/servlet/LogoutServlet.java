@@ -16,23 +16,18 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-
-		if (session.getAttribute("activeUser") == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		} else {
-
+		HttpSession session = request.getSession(false);
+		if (session != null) {
 			session.invalidate();
-
-			request.setAttribute("logout", "You have successfully logged out!");
-
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}
 
+		HttpSession newSession = request.getSession(true);
+		newSession.setAttribute("logout", "You have successfully logged out!");
+		response.sendRedirect("login.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doGet(request, response);
 	}
-
 }
