@@ -53,6 +53,15 @@
 		session.removeAttribute("error");
 		}
 		%>
+		<%
+		String passChangeMsg = (String) session.getAttribute("passchange");
+		if (passChangeMsg != null) {
+		%>
+		<p style="color: green; text-align: center; margin: 20px 0;"><%=passChangeMsg%></p>
+		<%
+		session.removeAttribute("passchange");
+		}
+		%>
 		<h2>Welcome Back</h2>
 
 		<form class="auth-form" method="post" action="login">

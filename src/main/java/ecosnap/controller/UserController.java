@@ -7,14 +7,17 @@ import ecosnap.model.BookTable;
 public interface UserController {
 
 	// Methods
-	
-	boolean userSignup(String username, String password);
 
-	boolean userExists(String username, String password);
+	boolean userSignup(String email, String password);
+
+	boolean userExists(String email, String password);
 
 	List<UserTable> allData();
 
 	boolean userBooks(BookTable booking);
 
 	List<BookTable> bookData();
+
+	boolean updatePassword(String email, String oldPassword, String newPassword);
+
 }

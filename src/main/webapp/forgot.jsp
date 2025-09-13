@@ -5,11 +5,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sign up</title>
-<link href="css/login.css" rel="stylesheet" />
+<title>Forgot Password</title>
+<link rel="stylesheet" href="css/login.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-	integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
@@ -20,7 +19,6 @@
 	<div class="login-container">
 		<div class="left-panel">
 			<img src="img/homecamera.png" alt="Camera" class="bg-img" />
-
 			<div class="overlay-text">
 				<span class="dot"></span>
 				<h1>Capture your moment with us.</h1>
@@ -31,37 +29,41 @@
 		</div>
 
 		<div class="right-panel">
+			<%
+			String passErrorMsg = (String) session.getAttribute("passerror");
+			if (passErrorMsg != null) {
+			%>
+			<p style="color: red; text-align: center; margin: 20px 0;"><%=passErrorMsg%></p>
+			<%
+			session.removeAttribute("passerror");
+			}
+			%>
 			<div class="form-wrapper">
-				<h2>Sign Up</h2>
-				<p style="color: red">${signupfail}</p>
-				<form class="login-form" action="signup" method="post">
-					<label for="email">Email</label> <input type="email" name="email"
-						placeholder="Enter an email" required /> <label for="password">Password</label>
+				<h2>Forgot Password?</h2>
+
+				<form class="login-form"
+					action="<%=request.getContextPath()%>/forgotpassword" method="post">
+					<label for="email">Email</label> <input type="email" id="email"
+						name="email" placeholder="Enter your email" required /> <label
+						for="oldPassword">Old Password</label>
 					<div class="password-wrapper">
-						<input type="password" name="password"
-							placeholder="Create a password" required />
+						<input type="password" id="oldPassword" name="oldPassword"
+							placeholder="Enter your old password" required />
 					</div>
 
-					<div class="forgot-password">
-						<a href="forgotpassword">Forget your password</a>
+					<label for="newPassword">New Password</label>
+					<div class="password-wrapper">
+						<input type="password" id="newPassword" name="newPassword"
+							placeholder="Enter your new password" required />
 					</div>
+
 					<div>
-						<a href="">
-							<button type="submit" class="submit-btn">Sign up</button>
-						</a>
+						<button type="submit" class="submit-btn">Change Password</button>
 					</div>
 				</form>
 
-				<div class="divider">
-					<span>OR</span>
-				</div>
-
-				<button class="social-btn google">
-					<i class="ri-google-fill"></i> Continue with Google
-				</button>
-
 				<p class="bottom-signup">
-					Don't have an account? <a href="login">Log in</a>
+					Remembered your password? <a href="login.jsp">Log in</a>
 				</p>
 			</div>
 		</div>
